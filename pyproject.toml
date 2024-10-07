@@ -8,8 +8,8 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
 
-[tool.poetry.dependencies.naptha-sdk]
-git = "https://github.com/NapthaAI/naptha-sdk.git"
+[tool.poetry.dependencies]
+naptha-sdk = { git = "https://github.com/NapthaAI/naptha-sdk.git", branch = "chore/updated-task" }
 
 [build-system]
 requires = ["poetry-core"]
