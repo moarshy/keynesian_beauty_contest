@@ -38,6 +38,11 @@ async def run(inputs, worker_node_urls, *args, **kwargs):
 
     logger.info(f"Results: {results}")
 
+    # Close all connections at the end of the run
+    connection_manager = kwargs.get("connection_manager", None)
+    if connection_manager:
+        connection_manager.close_all()
+
     return results 
 
 
