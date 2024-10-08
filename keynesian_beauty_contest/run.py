@@ -21,7 +21,13 @@ async def run(inputs, worker_node_urls, *args, **kwargs):
     for i in range(num_agents):
         node_index = min(i // agents_per_node, num_nodes - 1)
         name = f"Agent_{i}"
-        agent = Agent(name=name, fn="random_number_agent", worker_node_url=worker_node_urls[node_index], *args, **kwargs)
+        agent = Agent(
+            name=name, 
+            fn="random_number_agent", 
+            worker_node_url=worker_node_urls[node_index], 
+            *args, 
+            **kwargs
+        )
         tasks.append(agent(agent_name=name))
 
     results = await asyncio.gather(*tasks)
