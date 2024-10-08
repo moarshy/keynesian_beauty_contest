@@ -25,7 +25,7 @@ async def run(inputs, worker_node_urls, *args, **kwargs):
             name=name, 
             fn="random_number_agent", 
             worker_node_url=worker_node_urls[node_index], 
-            run_params={},
+            run_params={'agent_name': name},
             *args, 
             **kwargs
         )
