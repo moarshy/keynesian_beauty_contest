@@ -9,7 +9,7 @@ packages = [
 ]
 [tool.poetry.dependencies]
 python = ">=3.10,<=3.13"
-naptha-sdk = {git = "https://github.com/NapthaAI/naptha-sdk.git", branch = "fix/ws-timeout"}
+naptha-sdk = {git = "https://github.com/NapthaAI/naptha-sdk.git", branch = "fix/grpc"}
 
 [build-system]
 requires = ["poetry-core"]
