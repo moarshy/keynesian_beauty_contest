@@ -41,7 +41,7 @@ class KeynesianBeautyContest:
             # Return a placeholder result in case of error
             return None
         
-    async def run_beauty_contest(self, module_run: OrchestratorRunInput, batch_size: int = 3, *args, **kwargs):
+    async def run_beauty_contest(self, module_run: OrchestratorRunInput, batch_size: int = 5, *args, **kwargs):
         """Run the beauty contest with agents processed in batches"""
         num_nodes = len(self.agent_deployments)
         num_agents = int(module_run.inputs.num_agents)
@@ -105,9 +105,6 @@ async def run(module_run: Dict, *args, **kwargs):
     module_run = OrchestratorRunInput(**module_run)
     module_run.inputs = InputSchema(**module_run.inputs)
     
-    # Extract batch size from inputs or use default
-    batch_size = int(module_run.inputs.get("batch_size", 3))
-    
     beauty_contest = KeynesianBeautyContest(module_run.deployment)
-    results = await beauty_contest.run_beauty_contest(module_run, batch_size=batch_size, *args, **kwargs)
+    results = await beauty_contest.run_beauty_contest(module_run, batch_size=5, *args, **kwargs)
     return results
