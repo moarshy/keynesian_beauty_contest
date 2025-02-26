@@ -41,21 +41,21 @@ class KeynesianBeautyContest:
             # Return a placeholder result in case of error
             return None
         
-    async def run_beauty_contest(self, module_run: OrchestratorRunInput, batch_size: int = 5, *args, **kwargs):
+    async def run_beauty_contest(self, module_run: OrchestratorRunInput, *args, **kwargs):
         """Run the beauty contest with agents processed in batches"""
         num_nodes = len(self.agent_deployments)
         num_agents = int(module_run.inputs.num_agents)
         agents_per_node = math.ceil(num_agents / num_nodes)
 
         ist = time.time()
-        logger.info(f"Running {num_agents} agents in batches of {batch_size}...")
+        logger.info(f"Running {num_agents} agents in batches of {module_run.inputs.batch_size}...")
         
         all_results = []
-        batch_count = math.ceil(num_agents / batch_size)
+        batch_count = math.ceil(num_agents / module_run.inputs.batch_size)
         
         for batch_num in range(batch_count):
-            batch_start = batch_num * batch_size
-            batch_end = min(batch_start + batch_size, num_agents)
+            batch_start = batch_num * module_run.inputs.batch_size
+            batch_end = min(batch_start + module_run.inputs.batch_size, num_agents)
             logger.info(f"Processing batch {batch_num+1}/{batch_count} (agents {batch_start}-{batch_end-1})")
             
             batch_tasks = []
@@ -106,5 +106,5 @@ async def run(module_run: Dict, *args, **kwargs):
     module_run.inputs = InputSchema(**module_run.inputs)
     
     beauty_contest = KeynesianBeautyContest(module_run.deployment)
-    results = await beauty_contest.run_beauty_contest(module_run, batch_size=5, *args, **kwargs)
+    results = await beauty_contest.run_beauty_contest(module_run, *args, **kwargs)
     return results
