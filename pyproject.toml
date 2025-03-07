@@ -9,6 +9,7 @@ readme = "README.md"
 requires-python = ">=3.10,<=3.13"
 dependencies = [
     "naptha-sdk",
+    "pydantic>=2.10.6",
 ]
 
 [tool.setuptools.packages.find]
